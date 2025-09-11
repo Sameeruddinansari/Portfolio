@@ -1,0 +1,413 @@
+/* Base container */
+.neo-toggle-container {
+  --toggle-width: 70px;
+  --toggle-height: 30px;
+  --toggle-bg: #181c20;
+  --toggle-off-color: #475057;
+  --toggle-on-color: #36e2f9e7;
+  --toggle-transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .neo-toggle-container {
+    --toggle-width: 60px;
+    --toggle-height: 26px;
+    margin: 8px 0;
+  }
+
+  .neo-thumb-core {
+    inset: 4px;
+  }
+
+  .neo-thumb-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .neo-spectrum-analyzer {
+    bottom: 4px;
+    right: 6px;
+    height: 7px;
+    gap: 1.5px;
+  }
+
+  .neo-status-text {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .neo-toggle-container {
+    --toggle-width: 50px;
+    --toggle-height: 22px;
+    margin: 6px 0;
+  }
+
+  .neo-thumb-core {
+    inset: 3px;
+  }
+
+  .neo-thumb-icon svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .neo-spectrum-analyzer {
+    bottom: 3px;
+    right: 5px;
+    height: 6px;
+    gap: 1px;
+  }
+
+  .neo-spectrum-bar {
+    width: 1px;
+  }
+
+  .neo-status {
+    bottom: -14px;
+  }
+
+  .neo-status-dot {
+    width: 2px;
+    height: 2px;
+  }
+
+  .neo-status-text {
+    font-size: 7px;
+    letter-spacing: 0.5px;
+  }
+}
+
+.neo-toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.neo-toggle {
+  position: relative;
+  width: var(--toggle-width);
+  height: var(--toggle-height);
+  display: block;
+  cursor: pointer;
+  transform: translateZ(0);
+  perspective: 500px;
+}
+
+.neo-track {
+  position: absolute;
+  inset: 0;
+  border-radius: calc(var(--toggle-height) / 2);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: translateZ(-1px);
+  transition: transform var(--toggle-transition);
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.neo-background-layer {
+  position: absolute;
+  inset: 0;
+  background: var(--toggle-bg);
+  background-image: linear-gradient(-45deg,
+      rgba(20, 20, 20, 0.8) 0%,
+      rgba(30, 30, 30, 0.3) 50%,
+      rgba(20, 20, 20, 0.8) 100%);
+  opacity: 1;
+  transition: all var(--toggle-transition);
+}
+
+.neo-grid-layer {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right,
+      rgba(71, 80, 87, 0.05) 1px,
+      transparent 1px),
+    linear-gradient(to bottom, rgba(71, 80, 87, 0.05) 1px, transparent 1px);
+  background-size: 5px 5px;
+  opacity: 0;
+  transition: opacity var(--toggle-transition);
+}
+
+.neo-track-highlight {
+  position: absolute;
+  inset: 1px;
+  border-radius: calc(var(--toggle-height) / 2);
+  background: linear-gradient(90deg, transparent, rgba(54, 249, 199, 0));
+  opacity: 0;
+  transition: all var(--toggle-transition);
+}
+
+.neo-spectrum-analyzer {
+  position: absolute;
+  bottom: 6px;
+  right: 10px;
+  height: 10px;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity var(--toggle-transition);
+}
+
+.neo-spectrum-bar {
+  width: 2px;
+  height: 3px;
+  background-color: var(--toggle-on-color);
+  opacity: 0.8;
+}
+
+.neo-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: var(--toggle-height);
+  height: var(--toggle-height);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transform-style: preserve-3d;
+  transition: transform var(--toggle-transition);
+  z-index: 1;
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-thumb {
+  transform: translateY(-50%) translateX(calc(var(--toggle-width) - var(--toggle-height)));
+}
+
+.neo-thumb-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--toggle-off-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all var(--toggle-transition);
+}
+
+.neo-thumb-core {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+  transition: all var(--toggle-transition);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neo-thumb-icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  transition: all var(--toggle-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.neo-thumb-icon svg {
+  width: 15px;
+  height: 12px;
+  color: black;
+}
+
+.neo-gesture-area {
+  position: absolute;
+  inset: -10px;
+  z-index: 0;
+}
+
+.neo-interaction-feedback {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.neo-ripple {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+      var(--toggle-on-color) 0%,
+      transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.4s ease-out;
+}
+
+.neo-progress-arc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--toggle-on-color);
+  transform: translate(-50%, -50%) scale(0) rotate(0deg);
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.5s ease;
+}
+
+.neo-status {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.neo-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.neo-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--toggle-off-color);
+  transition: all var(--toggle-transition);
+}
+
+.neo-status-text {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--toggle-off-color);
+  letter-spacing: 1px;
+  transition: all var(--toggle-transition);
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-thumb-ring {
+  background-color: var(--toggle-on-color);
+  border-color: rgba(54, 249, 199, 0.3);
+  box-shadow: 0 0 15px rgba(54, 249, 199, 0.5);
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-track-highlight {
+  background: linear-gradient(90deg, transparent, rgba(54, 249, 199, 0.2));
+  opacity: 1;
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-grid-layer {
+  opacity: 1;
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-spectrum-analyzer {
+  opacity: 1;
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-spectrum-bar:nth-child(1) {
+  animation: neo-spectrum 0.9s infinite;
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-spectrum-bar:nth-child(2) {
+  animation: neo-spectrum 0.8s 0.1s infinite;
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-spectrum-bar:nth-child(3) {
+  animation: neo-spectrum 1.1s 0.2s infinite;
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-spectrum-bar:nth-child(4) {
+  animation: neo-spectrum 0.7s 0.1s infinite;
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-spectrum-bar:nth-child(5) {
+  animation: neo-spectrum 0.9s 0.15s infinite;
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-status-dot {
+  background-color: var(--toggle-on-color);
+  box-shadow: 0 0 8px var(--toggle-on-color);
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-status-text {
+  color: var(--toggle-on-color);
+}
+
+.neo-toggle:hover .neo-thumb-ring {
+  transform: scale(1.02);
+}
+
+.neo-toggle.neo-dragging .neo-track {
+  transform: translateZ(-1px) scale(1.02);
+}
+
+.neo-toggle.neo-dragging .neo-thumb {
+  transition: none;
+}
+
+/* Animations */
+@keyframes neo-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes neo-spectrum {
+  0% {
+    height: 3px;
+  }
+
+  50% {
+    height: 8px;
+  }
+
+  100% {
+    height: 3px;
+  }
+}
+
+.neo-toggle-input:checked+.neo-toggle .neo-status-text::before {
+  content: "ACTIVE";
+}
+
+.neo-toggle-input:not(:checked)+.neo-toggle .neo-status-text::before {
+  content: "STANDBY";
+}
+
+[data-theme="light"] .neo-toggle-container {
+  --toggle-bg: #e0e0e0;
+  --toggle-off-color: #a0a0a0;
+  --toggle-on-color: #1a8c6d;
+}
+
+[data-theme="light"] .neo-background-layer {
+  background-image: linear-gradient(-45deg,
+      rgba(220, 220, 220, 0.8) 0%,
+      rgba(240, 240, 240, 0.3) 50%,
+      rgba(220, 220, 220, 0.8) 100%);
+}
