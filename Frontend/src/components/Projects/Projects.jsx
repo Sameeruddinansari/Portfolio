@@ -1,5 +1,7 @@
 import './Projects.css';
-
+import bookFinderImage from '../../assets/bookfinder.png';
+import internet from '../../assets/internet.svg';
+import github from '../../assets/github.svg';
 
 export default function Projects() {
   const projects = [
@@ -7,7 +9,7 @@ export default function Projects() {
       id: 1,
       title: "BookFinder",
       description: "A comprehensive book discovery platform that helps users explore millions of books with advanced search functionality, filtering options, and beautiful UI design.",
-      image: "/bookfinder.png",
+      image: bookFinderImage,
       technologies: ["React", "JavaScript", "CSS", "Open Library API", "Responsive Design"],
       liveUrl: "https://sameeruddinansari.github.io/BookFinder/",
       githubUrl: "https://github.com/sameeruddinansari/BookFinder",
@@ -53,7 +55,7 @@ export default function Projects() {
                       className="project-btn primary"
                     >
                       <img
-                        src="/internet.svg"
+                        src={internet}
                         alt="GitHub"
                         style={{ width: "20px", height: "20px" }}
                       />
@@ -64,7 +66,7 @@ export default function Projects() {
                       className="project-btn secondary"
                     >
                       <img className='git'
-                        src="/github.svg"
+                        src={github}
                         alt="GitHub"
                         style={{ width: "20px", height: "20px", marginRight: "8px" }}
                       />

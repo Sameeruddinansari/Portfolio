@@ -1,20 +1,27 @@
 import './About.css';
-
+import jsIcon from '../../assets/javascript.svg';
+import htmlIcon from '../../assets/html.svg';
+import cssIcon from '../../assets/css.svg';
+import nodeIcon from '../../assets/nodejs.svg';
+import expressIcon from '../../assets/expressjs.svg';
+import mongoIcon from '../../assets/mongodb.svg';
+import mysqlIcon from '../../assets/mysql.svg';
+import javaIcon from '../../assets/java.svg';
+import reactIcon from '../../assets/react.svg';
 
 export default function About() {
   const skills = [
-    {
-      icon: '/react.svg', name: 'React', level: 90, category: 'frontend'
-    },
-    { icon: '/javascript.svg', name: 'JavaScript', level: 95, category: 'language' },
-    { icon: '/html.svg', name: 'HTML', level: 95, category: 'frontend' },
-    { icon: '/css.svg', name: 'CSS', level: 90, category: 'frontend' },
-    { icon: '/nodejs.svg', name: 'Node.js', level: 75, category: 'backend' },
-    { icon: '/expressjs.svg', name: 'Express.js', level: 85, category: 'backend' },
-    { icon: '/mongodb.svg', name: 'MongoDB', level: 80, category: 'database' },
-    { icon: '/mysql.svg', name: 'SQL', level: 75, category: 'database' },
-    { icon: '/java.svg', name: 'Java', level: 70, category: 'language' }
+    { icon: reactIcon, name: 'React', level: 90, category: 'frontend' },
+    { icon: jsIcon, name: 'JavaScript', level: 95, category: 'language' },
+    { icon: htmlIcon, name: 'HTML', level: 95, category: 'frontend' },
+    { icon: cssIcon, name: 'CSS', level: 90, category: 'frontend' },
+    { icon: nodeIcon, name: 'Node.js', level: 75, category: 'backend' },
+    { icon: expressIcon, name: 'Express.js', level: 85, category: 'backend' },
+    { icon: mongoIcon, name: 'MongoDB', level: 80, category: 'database' },
+    { icon: mysqlIcon, name: 'SQL', level: 75, category: 'database' },
+    { icon: javaIcon, name: 'Java', level: 70, category: 'language' },
   ];
+
 
   const experiences = [
     {
